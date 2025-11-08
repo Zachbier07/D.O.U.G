@@ -7,9 +7,8 @@ from std_msgs.msg import Bool
 
 class JazzyTalker(Node):
     def __init__(self):
-        super().__init__('jazzy_talker')
-        self.get_logger().info("Jazzy Talker node started!")
-        self.tracker = HandTracker()  # make it an attribute
+        super().__init__('Talker')
+        self.tracker = HandTracker() 
         self.publisher = self.create_publisher(Bool, 'handDetection', 10)
 
     def run(self):
