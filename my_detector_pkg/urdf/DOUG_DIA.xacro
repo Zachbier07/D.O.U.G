@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<robot name="DOUG_DIA" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find DOUG_DIA_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find DOUG_DIA_description)/urdf/DOUG_DIA.trans" />
+<xacro:include filename="$(find DOUG_DIA_description)/urdf/DOUG_DIA.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.07619999999999999 0.07619999999999999 0.03335" rpy="0 0 0"/>
+    <mass value="12.1608918072"/>
+    <inertia ixx="0.028046" iyy="0.028046" izz="0.047074" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://DOUG_DIA_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://DOUG_DIA_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+</robot>
