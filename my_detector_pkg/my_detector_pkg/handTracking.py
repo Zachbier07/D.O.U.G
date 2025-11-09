@@ -5,8 +5,6 @@ import os
 
 class HandTracker:
     def __init__(self, camera_index=0):
-        
-        self.bankOpen = False
 
         self.mp_hands = mp.solutions.hands
         self.hands = self.mp_hands.Hands(
@@ -55,15 +53,12 @@ class HandTracker:
         # Process with MediaPipe
         results = self.hands.process(rgb_frame)
         
-        if not results.multi_hand_landmarks or self.bankOpen:
+        if not results.multi_hand_landmarks:
             action = False
         else: 
             action = True
                     
         return action
-    
-    def toggle_bank(self):
-        self.bankOpen = not self.bankOpen
     
     def release(self):
         if self.cap is not None:
