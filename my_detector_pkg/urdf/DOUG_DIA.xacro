@@ -64,7 +64,7 @@
     <inertia ixx="0.012051" iyy="0.05073" izz="0.048498" ixy="2.4e-05" iyz="2e-05" ixz="-0.003092"/>
   </inertial>
   <visual>
-    <origin xyz="0.228079 -0.243614 -0.3505" rpy="0 0 0"/>
+    <origin xyz="0.075 -0.243614 -0.2775" rpy="0 0 0"/>
     <geometry>
       <mesh filename="package://my_detector_pkg/meshes/mount_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
@@ -86,7 +86,7 @@
 </joint>
 
 <joint name="Revolute 2" type="continuous">
-  <origin xyz="-0.151879 0.167414 0.2838" rpy="0 0 0"/>
+  <origin xyz="0.0 0.167414 0.21" rpy="0 0 0"/>
   <parent link="top_1"/>
   <child link="mount_1"/>
   <axis xyz="0.002867 0.999996 0.0"/>
