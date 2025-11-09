@@ -1,9 +1,20 @@
 <?xml version="1.0" ?>
 <robot name="DOUG_DIA" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<xacro:include filename="$(find DOUG_DIA_description)/urdf/materials.xacro" />
-<xacro:include filename="$(find DOUG_DIA_description)/urdf/DOUG_DIA.trans" />
-<xacro:include filename="$(find DOUG_DIA_description)/urdf/DOUG_DIA.gazebo" />
+<xacro:include filename="$(find my_detector_pkg)/urdf/DOUG_DIA.trans" />
+<xacro:include filename="$(find my_detector_pkg)/urdf/DOUG_DIA.gazebo" />
+
+<material name="silver">
+  <color rgba="0.75 0.75 0.75 1.0"/>
+</material>
+
+<link name="world_dummy"/>
+<joint name="world_joint" type="fixed">
+  <parent link="world_dummy"/>
+  <child link="base_link"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
 <link name="base_link">
   <inertial>
     <origin xyz="-0.07619999999999999 0.07619999999999999 0.03335" rpy="0 0 0"/>
@@ -13,16 +24,72 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://DOUG_DIA_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://my_detector_pkg/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://DOUG_DIA_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://my_detector_pkg/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
+
+<link name="top_1">
+  <inertial>
+    <origin xyz="6.320565881803852e-05 0.02204657355503649 0.079491384310047" rpy="0 0 0"/>
+    <mass value="8.207143738753775"/>
+    <inertia ixx="0.051275" iyy="0.049096" izz="0.018883" ixy="-6e-06" iyz="-0.008445" ixz="-2.4e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0762 -0.0762 -0.0667" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://my_detector_pkg/meshes/top_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0762 -0.0762 -0.0667" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://my_detector_pkg/meshes/top_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="mount_1">
+  <inertial>
+    <origin xyz="0.18262673870655244 -0.213885197874163 -0.0816825756014195" rpy="0 0 0"/>
+    <mass value="9.256507206311536"/>
+    <inertia ixx="0.012051" iyy="0.05073" izz="0.048498" ixy="2.4e-05" iyz="2e-05" ixz="-0.003092"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.075 -0.243614 -0.2775" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://my_detector_pkg/meshes/mount_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.228079 -0.243614 -0.3505" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://my_detector_pkg/meshes/mount_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Revolute 1" type="continuous">
+  <origin xyz="-0.0762 0.0762 0.0667" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="top_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="Revolute 2" type="continuous">
+  <origin xyz="0.0 0.167414 0.21" rpy="0 0 0"/>
+  <parent link="top_1"/>
+  <child link="mount_1"/>
+  <axis xyz="0.002867 0.999996 0.0"/>
+</joint>
 
 </robot>
