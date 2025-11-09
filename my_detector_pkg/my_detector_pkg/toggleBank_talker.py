@@ -1,26 +1,32 @@
 import rclpy
-#from my_detector_pkg.toggleBank import button
+from my_detector_pkg.toggleBank import Button
 from rclpy.node import Node
 import time
 from std_msgs.msg import Bool
 
 
 class Talker(Node):
+
+
     def __init__(self):
+        self.button = Button()
         super().__init__('Talker')
         self.publisher = self.create_publisher(Bool, 'disarmedEnabled', 10)
+        self.disarmed = True
 
     def run(self):
         while rclpy.ok():
-            disarmed = True
+            # If it returns true it will switch disarmed state
+            if(self.button.getButton()):
+                self.disarmed = not self.disarmed
 
-            self.get_logger().info("Disarmed: " and str(disarmed))
+            self.get_logger().info(str(self.disarmed))
 
             msg = Bool()
-            msg.data = disarmed
+            msg.data = self.disarmed
             self.publisher.publish(msg)
 
-            time.sleep(0.25)
+            time.sleep(1)
 
 def main(args=None):
     rclpy.init(args=args)
